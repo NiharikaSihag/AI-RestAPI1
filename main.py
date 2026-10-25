@@ -39,6 +39,13 @@ class AnalysisResult(BaseModel):
     summary: str = Field(min_length=3, max_length=500)
     topics: list[str] = Field(max_length=5)
 
+@app.get("/")
+def home():
+    return {
+        "message": "AI REST API is running",
+        "docs": "/docs",
+        "endpoint": "/analyze",
+    }
 
 @app.post("/analyze", response_model=AnalysisResult)
 def analyze(request: AnalyzeRequest) -> AnalysisResult:
